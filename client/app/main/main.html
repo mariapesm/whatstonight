@@ -12,8 +12,12 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
+      <form ng-submit="searchBars()">
+        <input ng-model="location" />
+        <button type="submit" class="btn btn-default">search</button>
+      </form>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="bar in bars">
+        <li><a href="{{bar.url}}" tooltip="{{thing.info}}">{{bar.name}}</a></li>
       </ul>
     </div>
   </div>

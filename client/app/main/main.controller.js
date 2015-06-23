@@ -1,22 +1,17 @@
 'use strict';
 
 angular.module('whatstonightApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, User, Auth) {
     $scope.awesomeThings = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
+    $scope.location = "77006";
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
+    $scope.searchBars = function() {  
+      $http.get('/api/bars/start/' + $scope.location).success(function(Bars) {
+        $scope.bars = Bars;
+      })
+    }
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
+
+
   });
