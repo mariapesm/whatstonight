@@ -203,3 +203,6 @@ img {
 
   transform: translateY(-200%);
 }
+.snippet {
+  font-size: 10pt;
+}
