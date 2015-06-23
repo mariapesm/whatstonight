@@ -1,23 +1,27 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div ng-include="'components/navbar/navbar.html'" style="display: none;"></div>
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <h1>What's up tonight?</h1>
+    <p class="lead">See which bars are going to be hoppin' tonight and RSVP ahead of time!</p>
   </div>
 </header>
 
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <form ng-submit="searchBars()">
-        <input ng-model="location" />
-        <button type="submit" class="btn btn-default">search</button>
+      <!--<h1 class="page-header">Check it out:</h1> !-->
+
+      <form ng-submit="searchBars()" class="form-inline">
+        <div class="form-group col-xs-10">
+          <input type="text" ng-model="location" class="form-control" placeholder="Where you at?">
+        </div>
+        <button type="submit" class="btn btn-default col-xs-2">go</button>
       </form>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="bar in bars">
-        <li><a href="{{bar.url}}" tooltip="{{thing.info}}">{{bar.name}}</a></li>
+
+
+      <ul class="nav nav-tabs nav-stacked col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="bar in bars">
+        <li><a href="{{bar.url}}" class="col-xs-10"><img class="img-rounded" ng-src="{{bar.image_url}}" /> {{bar.name}}<br /> <i>"{{bar.snippet}}"</i> </a><a class="btn btn-default going col-xs-2"> Going</a></li>
       </ul>
     </div>
   </div>
