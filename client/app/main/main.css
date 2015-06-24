@@ -204,3 +204,27 @@ img {
 .snippet {
   margin-top: 8px;
 }
+
+
+.loading {
+  -webkit-animation: cssAnimation 3.5s infinite linear;
+  -moz-animation: cssAnimation 3.5s infinite linear;
+  -o-animation: cssAnimation 3.5s infinite linear;
+  font-size: 60px;
+  text-align: center;
+  line-height: 60px;
+  height: 60px !important;
+}
+
+@-webkit-keyframes cssAnimation {
+from { -webkit-transform: rotate(0deg); }
+to { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes cssAnimation {
+from { -moz-transform: rotate(0deg); }
+to { -moz-transform: rotate(360deg);}
+}
+@-o-keyframes cssAnimation {
+from { -o-transform: rotate(0deg);}
+to { -o-transform: rotate(360deg);}
+}
