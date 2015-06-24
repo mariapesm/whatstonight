@@ -3,7 +3,7 @@
 angular.module('whatstonightApp')
   .controller('MainCtrl', function ($scope, $http, User, Auth) {
     $scope.awesomeThings = [];
-
+    $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.searchBars = function() {
       $scope.loading=true;
@@ -12,13 +12,14 @@ angular.module('whatstonightApp')
         $scope.loading=false;
       })
     }
-
-    $scope.going = function(bar) {
-
+    $scope.going = function() {
+      console.log($scope.getCurrentUser());
+      /**
       bar.attendees.push(getCurrentUser()._id);
       $http.post('/api/bars/',bar).success(function(Bars) {
         $scope.bars = Bars;
       })
+      **/
     }
 
   });

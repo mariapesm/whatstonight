@@ -39,14 +39,44 @@ passport.use(new TwitterStrategy({
     callbackURL: "http://localhost:9000/auth/twitter/callback"
   },
   function(token, tokenSecret, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
 
-      // To keep the example simple, the user's Twitter profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Twitter account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
+        // make the code asynchronous
+    // User.findOne won't fire until we have all our data back from Twitter
+        process.nextTick(function() {
+
+            User.findOne({ 'twitter.id' : profile.id }, function(err, user) {
+
+                // if there is an error, stop everything and return that
+                // ie an error connecting to the database
+                if (err)
+                    return done(err);
+
+                // if the user is found then log them in
+                if (user) {
+                    return done(null, user); // user found, return that user
+                } else {
+                    // if there is no user, create them
+                    var newUser                 = new User();
+
+                    // set all of the user data that we need
+                    newUser.twitter = {
+                      id: profile.id,
+                      token: token,
+                      username: profile.username,
+                      displayName: profile.displayName,
+                    }
+                    newUser.name = profile.displayName;
+                    newUser.provider = 'twitter';
+
+                    // save our user into the database
+                    newUser.save(function(err, user) {
+                      if (err) return validationError(res, err);
+                      var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+                      //res.json({ token: token });
+                    });
+                }
+            });
+
     });
   }
 ));
@@ -96,8 +126,6 @@ function hasRole(roleRequired) {
     });
 }
 
-
-
 /**
  * Returns a jwt token signed by the app secret
  */
@@ -115,7 +143,13 @@ function setTokenCookie(req, res) {
   res.redirect('/');
 }
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/auth/twitter')
+}
+
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
 exports.signToken = signToken;
 exports.setTokenCookie = setTokenCookie;
+exports.ensureAuthenticated = ensureAuthenticated;

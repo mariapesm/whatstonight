@@ -1,4 +1,4 @@
-<div ng-include="'components/navbar/navbar.html'" style="display: none;"></div>
+<div ng-include="'components/navbar/navbar.html'" style="display: none"></div>
 
 <header class="hero-unit" id="banner">
   <div class="container">
@@ -24,7 +24,7 @@
         <li>
           <img class="img-rounded" ng-src="{{bar.image_url}}" />
           <a ng-href="{{bar.url}}">{{bar.name}}</a>&nbsp;&nbsp;&nbsp;
-          <a class="btn btn-default btn-xs going" ng-click="addAttendee()">0 Going</a>
+          <a class="btn btn-default btn-xs going" ng-click="going()">0 Going</a>
           <p class="snippet"><i class="snippet">"{{bar.snippet}}"</i></p>
         </li>
       </ul>
