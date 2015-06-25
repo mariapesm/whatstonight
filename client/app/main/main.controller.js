@@ -35,9 +35,16 @@ angular.module('whatstonightApp')
 
     if ($scope.getCurrentUser().location!=="" && $scope.getCurrentUser().location !== undefined) {
         $scope.searchBars($scope.getCurrentUser().location);
+        $scope.location=$scope.getCurrentUser().location;
     }
-    
+
     $scope.going = function(bar) {
+
+      /**
+      $http.delete('/api/bars/' + bar._id);
+      **/
+
+
       if ($scope.getCurrentUser()._id !== undefined) {
         if (bar.attending.indexOf($scope.getCurrentUser()._id)==-1) {
           bar.attending.push($scope.getCurrentUser()._id);
@@ -46,21 +53,14 @@ angular.module('whatstonightApp')
           bar.attending = bar.attending.filter(function(item){return item!==null});
         }
         if (bar._id !== undefined && bar._id !== null && bar._id !== "") {
-          $http.delete('/api/bars/' + bar._id).success(function(){
-            $http.post('/api/bars/', bar).success(function(bar) {
-
-            })
-          })
-        } else { $http.post('/api/bars', bar).success(function(bar){
-            //scope.bars=[];
-            //searchBars();
-        })
+          $http.put('/api/bars/' + bar._id, bar);
+        } else { $http.post('/api/bars', bar).success(function(newBar){
+            bar=newBar;
+        });
         }
       } else {
         window.location.assign("http://whatsgoinontonight.herokuapp.com/auth/twitter")
-
       }
-
 
       /**
       bar.attendees.push(getCurrentUser()._id);
