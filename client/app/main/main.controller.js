@@ -32,7 +32,13 @@ angular.module('whatstonightApp')
       });
 
     }
+    $scope.getCurrentUser().$promise.then(function(user){
+      if (user.location!=="" && user.location !== undefined) {
+          $scope.searchBars(user.location);
+          $scope.location=user.location;
+      }
 
+    })
     if ($scope.getCurrentUser().location!=="" && $scope.getCurrentUser().location !== undefined) {
         $scope.searchBars($scope.getCurrentUser().location);
         $scope.location=$scope.getCurrentUser().location;
@@ -59,7 +65,7 @@ angular.module('whatstonightApp')
         });
         }
       } else {
-        window.location.assign("http://whatsgoinontonight.herokuapp.com/auth/twitter")
+        window.location.assign("http://localhost:9000/auth/twitter")
       }
 
       /**
