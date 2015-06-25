@@ -4,6 +4,13 @@ angular.module('whatstonightApp')
   .controller('MainCtrl', function ($scope, $http, User, Auth) {
     $scope.awesomeThings = [];
     $scope.getCurrentUser = Auth.getCurrentUser;
+      
+
+      if ($scope.getCurrentUser().location!=="" && $scope.getCurrentUser().location !== undefined) {
+        $scope.location = $scope.getCurrentUser().location;
+        $scope.searchBars();
+      }
+
 
     console.log($scope.getCurrentUser());
     $scope.searchBars = function() {
@@ -31,12 +38,6 @@ angular.module('whatstonightApp')
         $scope.loading=false;
       });
 
-    }
-    $scope.init=function(){
-      if ($scope.getCurrentUser().location!=="" && $scope.getCurrentUser().location !== undefined) {
-        $scope.location = $scope.getCurrentUser().location;
-        $scope.searchBars();
-      }
     }
     
     $scope.going = function(bar) {
