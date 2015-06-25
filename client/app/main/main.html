@@ -14,7 +14,7 @@
 
       <form ng-submit="searchBars()" class="form-inline">
         <div class="form-group col-xs-10">
-          <input type="text" ng-model="location" class="form-control" placeholder="Where you at?">
+          <input type="text" ng-model="location" class="form-control" placeholder="Where you at?" value="{{getCurrentUser().location}}">
         </div>
         <button type="submit" class="btn btn-default col-xs-2">go</button>
       </form>
