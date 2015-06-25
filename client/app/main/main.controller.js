@@ -32,17 +32,15 @@ angular.module('whatstonightApp')
       });
 
     }
-    $scope.getCurrentUser().$promise.then(function(user){
-      if (user.location!=="" && user.location !== undefined) {
-          $scope.searchBars(user.location);
-          $scope.location=user.location;
-      }
-
-    })
-    if ($scope.getCurrentUser().location!=="" && $scope.getCurrentUser().location !== undefined) {
-        $scope.searchBars($scope.getCurrentUser().location);
-        $scope.location=$scope.getCurrentUser().location;
+    if ($scope.getCurrentUser()._id !== undefined) {
+      $scope.getCurrentUser().$promise.then(function(user){
+        if (user.location!=="" && user.location !== undefined) {
+            $scope.searchBars(user.location);
+            $scope.location=user.location;
+        }
+      });
     }
+
 
     $scope.going = function(bar) {
 
