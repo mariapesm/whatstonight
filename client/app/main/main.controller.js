@@ -32,14 +32,12 @@ angular.module('whatstonightApp')
       });
 
     }
-    if ($scope.getCurrentUser()._id !== undefined) {
       $scope.getCurrentUser().$promise.then(function(user){
         if (user.location!=="" && user.location !== undefined) {
             $scope.searchBars(user.location);
             $scope.location=user.location;
         }
       });
-    }
 
 
     $scope.going = function(bar) {
