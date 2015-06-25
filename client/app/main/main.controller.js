@@ -33,7 +33,7 @@ angular.module('whatstonightApp')
 
     }
 
-    if ($scope.getCurrentUser().location!=="") {
+    if ($scope.getCurrentUser().location!=="" && $scope.getCurrentUser().location !== undefined) {
       $scope.location = $scope.getCurrentUser().location;
       $scope.searchBars();
     }
@@ -57,7 +57,7 @@ angular.module('whatstonightApp')
         })
         }
       } else {
-        window.location.assign("http://localhost:9000/auth/twitter")
+        window.location.assign("http://whatsgoinontonight.herokuapp.com/auth/twitter")
 
       }
 
