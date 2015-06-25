@@ -4,6 +4,7 @@ angular.module('whatstonightApp')
   .controller('MainCtrl', function ($scope, $http, User, Auth) {
     $scope.awesomeThings = [];
     $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.isLoggedIn = Auth.isLoggedInAsync;
 
     console.log($scope.getCurrentUser());
     $scope.searchBars = function(location) {
@@ -32,7 +33,7 @@ angular.module('whatstonightApp')
       });
 
     }
-    if ($scope.getCurrentUser()._id !== undefined) {
+    if ($scope.isLoggedIn) {
       $scope.getCurrentUser().$promise.then(function(user){
         if (user.location!=="" && user.location !== undefined) {
             $scope.searchBars(user.location);
