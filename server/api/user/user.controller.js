@@ -93,6 +93,22 @@ exports.me = function(req, res, next) {
   });
 };
 
+
+exports.update = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+  User.findById(req.params.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    user.location = req.body.location;
+    var updated = user;
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, user);
+    });
+  });
+};
+
+
 /**
  * Authentication callback
  */

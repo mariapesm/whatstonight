@@ -12,6 +12,7 @@ var UserSchema = new Schema({
     default: 'user'
   },
   twitter: Object,
+  location: {type: String, default: ''},
   //hashedPassword: String,
   provider: String,
   //salt: String

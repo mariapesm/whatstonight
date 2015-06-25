@@ -1,9 +1,5 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var TwitterStrategy  = require('passport-twitter').Strategy;
-var User       = require('../../api/user/user.model.js');
-var configAuth = require('../auth.service.js');
-
 
 exports.setup = function (User, config) {
   passport.use(new LocalStrategy({
