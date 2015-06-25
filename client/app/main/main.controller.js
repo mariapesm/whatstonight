@@ -65,7 +65,7 @@ angular.module('whatstonightApp')
         });
         }
       } else {
-        window.location.assign("http://localhost:9000/auth/twitter")
+        window.location.assign("http://whatsgoinontonight.herokuapp.com/auth/twitter")
       }
 
       /**
