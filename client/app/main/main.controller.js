@@ -6,16 +6,16 @@ angular.module('whatstonightApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     console.log($scope.getCurrentUser());
-    $scope.searchBars = function() {
+    $scope.searchBars = function(location) {
 
       if ($scope.getCurrentUser()._id !== undefined) {
         var user = $scope.getCurrentUser();
-        user.location=$scope.location;
+        user.location=location;
         $http.put('/api/users/' + user._id + '/location', user);
       }
       $scope.loading=true;
 
-      $http.get('/api/bars/start/' + $scope.location).success(function(Bars) {
+      $http.get('/api/bars/start/' + location).success(function(Bars) {
         $http.get('/api/bars/').success(function(dbBars) {
           $scope.bars=Bars.map(function(extBar) {
             for (var i =0; i < dbBars.length; i++) {
@@ -34,8 +34,7 @@ angular.module('whatstonightApp')
     }
 
     if ($scope.getCurrentUser().location!=="" && $scope.getCurrentUser().location !== undefined) {
-        $scope.location = $scope.getCurrentUser().location;
-        $scope.searchBars();
+        $scope.searchBars($scope.getCurrentUser().location);
     }
     
     $scope.going = function(bar) {
