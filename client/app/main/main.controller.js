@@ -17,7 +17,7 @@ angular.module('whatstonightApp')
       $scope.loading=true;
 
       $http.get('/api/bars/start/' + location).success(function(Bars) {
-        $http.get('/api/bars/').success(function(dbBars) {
+        $http.get('/api/bars/').success(function(oldBars) {
           $scope.bars=Bars.map(function(extBar) {
             for (var i =0; i < dbBars.length; i++) {
               if (extBar.url === dbBars[i].url) {
@@ -68,7 +68,7 @@ angular.module('whatstonightApp')
         });
         }
       } else {
-        window.location.assign("http://whatsgoinontonight.herokuapp.com/auth/twitter")
+        window.location.assign("http://localhost:9000/auth/twitter")
       }
 
       /**

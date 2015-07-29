@@ -6,7 +6,7 @@
 // You will need to set these on the server you deploy to.
 
 module.exports = {
-  DOMAIN:           'http://whatsgoinontonight.herokuapp.com',
+  DOMAIN:           'http://localhost:9000',
   SESSION_SECRET:   'whatstonight-secret',
 
   // Control debug level for modules using visionmedia/debug
